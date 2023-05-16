@@ -76,7 +76,7 @@ const resolvers = {
     // to save a book to a users saved books
     // async function to allow for await on findone and update 
     // passed the booktosave as the parameter 
-    saveBook: async (parent, { bookId }, context) => {
+    saveBook: async (parent, { bookData }, context) => {
     // if the user is logged in (and hence context.user exists)
       if (context.user) {
     // updated books is defined as the outcome of findone and update called on the user
