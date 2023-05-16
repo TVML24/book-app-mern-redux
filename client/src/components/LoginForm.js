@@ -9,23 +9,17 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 // set the default form state
-const [formState, setFormState] = useState({ email: '', password: '' });
+// const [formState, setFormState] = useState({ email: '', password: '' });
 
 
 const LoginForm = () => {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   // sets the default state for validated
   const [validated] = useState(false);
   // sets the default state for showalert
   const [showAlert, setShowAlert] = useState(false);
   // instructions for the function to use to log the user in 
   const [login, { error }] = useMutation(LOGIN_USER);
-
-  // on change the target of the event has it's value set to the input
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-  // sets userformdata to the value of the event so you can see what you are typing
-    setUserFormData({ ...userFormData, [name]: value });
-  };
 
   // handles the form submit
   const handleFormSubmit = async (event) => {
@@ -39,7 +33,7 @@ const LoginForm = () => {
 // calls login with the variables from form state (password, username)
     try {
       const { data } = await login({
-        variables: { ...formState },
+        variables: { ...userFormData },
       });
       Auth.login(data.login.token);
     } catch (e) {
@@ -47,12 +41,11 @@ const LoginForm = () => {
     }
   };
 
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormState({
-      ...formState,
+    setUserFormData({
+      ...userFormData,
       [name]: value,
     });
   };
@@ -69,7 +62,7 @@ const LoginForm = () => {
             type='text'
             placeholder='Your email'
             name='email'
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.email}
             required
           />
@@ -82,7 +75,7 @@ const LoginForm = () => {
             type='password'
             placeholder='Your password'
             name='password'
-            onChange={handleInputChange}
+            onChange={handleChange}
             value={userFormData.password}
             required
           />

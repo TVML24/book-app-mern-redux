@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Jumbotron,
   Container,
   Col,
   Form,
   Button,
   Card,
-  CardColumns,
+  Row
 } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
@@ -164,7 +163,7 @@ const SearchBooks = () => {
               </Col>
             );
           })}
-        </Row>
+          </Row>
       </Container>
     </>
   );
