@@ -76,7 +76,7 @@ const resolvers = {
     // to save a book to a users saved books
     // async function to allow for await on findone and update 
     // passed the booktosave as the parameter 
-    saveBook: async (parent, { bookData }, context) => {
+    saveBook: async (parent, { bookToSave }, context) => {
     // if the user is logged in (and hence context.user exists)
       if (context.user) {
     // updated books is defined as the outcome of findone and update called on the user
@@ -84,7 +84,7 @@ const resolvers = {
     // we locate the user with the user id passed from the header/token context 
           { _id: context.user._id },
     // we use $addToSet to add the chosen book to the users savedBooks 
-          { $addToSet: { savedBooks: bookId } },
+          { $addToSet: { savedBooks: bookToSave } },
     // we tell it to return the new info - not the original info
           { new: true }
     // we populate saved books again with the new info as it has changed. 

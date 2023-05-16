@@ -37,8 +37,7 @@ const SearchBooks = () => {
               ...me,
               savedBooks: [
                 ...me.savedBooks,
-                saveBook
-                .savedBooks[saveBook.savedBooks.length - 1],
+                saveBook.savedBooks[saveBook.savedBooks.length - 1],
               ],
             },
           },
@@ -86,7 +85,7 @@ const SearchBooks = () => {
   const handleSaveBook = async (bookId) => {
 
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-
+    console.log(bookToSave);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
@@ -94,7 +93,7 @@ const SearchBooks = () => {
 
     try {
       await saveBook({
-        variables: { bookData: { ...bookToSave } },
+        variables: { bookToSave },
       });
 
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
