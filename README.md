@@ -29,7 +29,7 @@ The user can also logout.
 ## Deployment
 
 Screenshot:
-![My Refactored Book App](./assets/images/screenportfolio.jpg)
+![My Refactored Book App](./assets/screen.jpg)
 
 The deployed application:
 https://tranquil-escarpment-50545.herokuapp.com/
