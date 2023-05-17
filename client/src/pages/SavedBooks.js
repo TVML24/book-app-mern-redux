@@ -17,7 +17,7 @@ import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [deleteBook, { error }] = useMutation(REMOVE_BOOK);
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
   const userData = data?.me || {};
   console.log(userData);
 
@@ -57,18 +57,18 @@ const SavedBooks = () => {
     }
 
     try {
-      await deleteBook({
+      await removeBook({
         variables: { bookId },
       });
 
       removeBookId(bookId);
       document.getElementById(bookId).remove();
-      let counterEl = document.getElementById('counter');
-      let currentNum = parseInt(counterEl.innerText.split(' ')[1]);
+      let counter = document.getElementById('counter');
+      let currentNum = parseInt(counter.innerText.split(' ')[1]);
       if (currentNum === 1) {
-        return (counterEl.innerText = 'You have no saved books!');
+        return (counter.innerText = 'You have no saved books!');
       } else {
-        counterEl.innerText = `Viewing ${currentNum - 1} saved ${
+        counter.innerText = `Viewing ${currentNum - 1} saved ${
           currentNum === 1 ? 'book' : 'books'
         }`;
       }
@@ -89,7 +89,7 @@ const SavedBooks = () => {
         </Container>
       </div>
       <Container>
-        <h2 className='pt-5'>
+        <h2 id= 'counter' className='pt-5'>
           {userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
@@ -98,7 +98,7 @@ const SavedBooks = () => {
           {userData.savedBooks.map((book) => {
             return (
               <Col md="4">
-                <Card key={book.bookId} border='dark'>
+                <Card id = {book.bookId} key={book.bookId} border='dark'>
                   {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
